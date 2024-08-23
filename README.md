@@ -23,17 +23,22 @@
 | ------------------ | ---------- | ------------------------------ |
 | item_name          | string     | null: false                    |
 | description        | text       | null: false                    |
-| category           | string     | null: false                    |
-| condition          | string     | null: false                    |
-| shipping_fee       | integer    | null: false                    |
-| shipping_from      | string     | null: false                    |
-| days_to_ship       | integer    | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_fee_id    | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
+| days_to_ship_id    | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
 - has_one :order
+- belongs_to :category
+- belongs_to :condition
+- belongs_to :shipping_fee
+- belongs_to :prefecture
+- belongs_to :days_to_ship
 
 
 ## ordersテーブル
@@ -48,11 +53,11 @@
 - has_one :mailing_address
 
 
-## Mailing_addressesテーブル
+## mailing_addressesテーブル
 | Column             | Type       | Options                        |
 | ------------------ | ---------- | ------------------------------ |
 | postal_code        | string     | null: false                    |
-| prefecture         | string     | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | city               | string     | null: false                    |
 | address            | string     | null: false                    |
 | building_name      | string     |                                |
@@ -61,3 +66,4 @@
 
 ### Association
 - belongs_to :order
+- belongs_to :prefecture
