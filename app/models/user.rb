@@ -10,4 +10,13 @@ class User < ApplicationRecord
   validates :kana_last_name, presence: true
   validates :kana_first_name, presence: true
   validates :birthday, presence: true
+  validate :password_complexity
+
+  private
+
+  def password_complexity
+    return if password.blank? || password =~ /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
+
+    errors.add :password, 'は英字と数字の両方を含めて設定してください'
+  end
 end
