@@ -18,8 +18,18 @@ class User < ApplicationRecord
   private
 
   def password_complexity
-    return if password.blank? || password =~ /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
+    return if password.blank?
 
-    errors.add :password, 'must include at least one lowercase letter and one digit'
+    if password =~ /\A[a-zA-Z]+\z/ # rubocop:disable Style/IfUnlessModifier
+      errors.add(:password, 'cannot be only letters')
+    end
+
+    if password =~ /\A\d+\z/ # rubocop:disable Style/IfUnlessModifier
+      errors.add(:password, 'cannot be only numbers')
+    end
+
+    return unless password =~ /[^\x00-\x7F]/
+
+    errors.add(:password, 'cannot include full-width characters')
   end
 end
