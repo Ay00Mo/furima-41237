@@ -11,12 +11,15 @@ class User < ApplicationRecord
   validates :kana_first_name, presence: true
   validates :birthday, presence: true
   validate :password_complexity
+  validates :last_name, :first_name, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'is invalid. Input full-width characters.' }
+  validates :kana_last_name, :kana_first_name,
+            format: { with: /\A[ァ-ヶー]+\z/, message: 'is invalid. Input full-width katakana characters.' }
 
   private
 
   def password_complexity
     return if password.blank? || password =~ /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i
 
-    errors.add :password, 'は英字と数字の両方を含めて設定してください'
+    errors.add :password, 'must include at least one lowercase letter and one digit'
   end
 end
