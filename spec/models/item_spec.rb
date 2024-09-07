@@ -78,6 +78,11 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include('Price is not a number')
       end
+      it 'ユーザーが紐づいていないと出品できない' do
+        @item.user = nil
+        expect(@item).not_to be_valid
+        expect(@item.errors.full_messages).to include('User must exist')
+      end
     end
   end
 end
