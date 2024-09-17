@@ -37,10 +37,10 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user == @item.user # rubocop:disable Style/GuardClause
+    if current_user == @item.user # rubocop:disable Style/IfUnlessModifier
       @item.destroy
-      redirect_to root_path
     end
+    redirect_to root_path
   end
 
   private
