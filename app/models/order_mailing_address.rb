@@ -11,4 +11,9 @@ class OrderMainlingAddress
     validates :phone_number, format: {with /\A[0-9]\z/, message: "is invalid. Only allows numbers"}
   end
   validates :prefecture_id, numericality: {other_than: 1, message: "can't be blank"}
+
+  def save
+    order = Order.create(user_id: user_id, item_id: item_id)
+    MailingAddress.create(postal_code: postal_code, city: city, address: address, phone_number: phone_number, order_id: order_id)
+  end
 end
