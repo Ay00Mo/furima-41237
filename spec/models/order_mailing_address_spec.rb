@@ -61,13 +61,13 @@ RSpec.describe OrderMailingAddress, type: :model do
       end
       it 'itemが紐づいていないと保存できない' do
         @order_mailing_address.item_id = nil
-        @order_miling_address.valid?
+        @order_mailing_address.valid?
         expect(@order_mailing_address.errors.full_messages).to include("Item can't be blank")
       end
       it 'tokenが空では保存できない' do
-        @order.token = nil
-        @order.valid?
-        expect(@order.errors.full_messages).to include("Token can't be blank")
+        @order_mailing_address.token = nil
+        @order_mailing_address.valid?
+        expect(@order_mailing_address.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
