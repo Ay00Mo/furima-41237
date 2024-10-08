@@ -20,6 +20,10 @@ class Item < ApplicationRecord
 
   validate :image_presence
 
+  def sold?
+    Order.exists?(item_id: self.id) # rubocop:disable Style/RedundantSelf
+  end
+
   private
 
   def image_presence
