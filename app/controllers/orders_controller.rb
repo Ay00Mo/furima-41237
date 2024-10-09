@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   def create
     @order_mailing_address = OrderMailingAddress.new(order_params)
      if @order_mailing_address.valid? # rubocop:disable Layout/IndentationConsistency
-       pay_item
+        pay_item # rubocop:disable Layout/IndentationWidth
         @order_mailing_address.save
         redirect_to root_path
      else
