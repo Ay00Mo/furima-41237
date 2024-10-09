@@ -9,9 +9,9 @@ class OrderMailingAddress
     validates :city
     validates :address
     validates :phone_number, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid. Only allows numbers' }
+    validates :token
   end
   validates :prefecture_id, numericality: { other_than: 1, message: "can't be blank" }
-  validates :token, presence: true
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id) # rubocop:disable Style/HashSyntax
