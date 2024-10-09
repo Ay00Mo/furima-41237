@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrderMailingAddress, type: :model do
   before do
     user = FactoryBot.create(:user)
-    item = FactoryBot.create(:item, user: user) # rubocop:disable Style/HashSyntax
+    item = FactoryBot.create(:item)
     @order_mailing_address = FactoryBot.build(:order_mailing_address, user_id: user.id, item_id: item.id)
   end
 
@@ -51,6 +51,16 @@ RSpec.describe OrderMailingAddress, type: :model do
       end
       it 'phone_numberが数字以外を含むと保存できない' do
         @order_mailing_address.phone_number = '090-1234-5678'
+        @order_mailing_address.valid?
+        expect(@order_mailing_address.errors.full_messages).to include("Phone number is invalid. Only allows numbers") # rubocop:disable Style/StringLiterals
+      end
+      it 'phone_numberが9桁以下では購入できない' do
+        @order_mailing_address.phone_number = '09087654'
+        @order_mailing_address.valid?
+        expect(@order_mailing_address.errors.full_messages).to include("Phone number is invalid. Only allows numbers") # rubocop:disable Style/StringLiterals
+      end
+      it 'phone_numberが12桁以上では購入できない' do
+        @order_mailing_address.phone_number = '090123456789'
         @order_mailing_address.valid?
         expect(@order_mailing_address.errors.full_messages).to include("Phone number is invalid. Only allows numbers") # rubocop:disable Style/StringLiterals
       end
