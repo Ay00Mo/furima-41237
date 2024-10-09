@@ -26,7 +26,7 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order_mailing_address).permit(:user_id, :item_id, :postal_code, :prefecture_id, :city, :address, :building_name,
+    params.require(:order_mailing_address).permit(:postal_code, :prefecture_id, :city, :address, :building_name,
                                   :phone_number).merge(item_id: params[:item_id], user_id: current_user.id, token: params[:token]) # rubocop:disable Layout/ArgumentAlignment
   end
 
