@@ -1,6 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -18,6 +19,10 @@ class Item < ApplicationRecord
             :prefecture_id, :days_to_ship_id, numericality: { other_than: 1, message: "can't be blank" }
 
   validate :image_presence
+
+  def sold?
+    Order.exists?(item_id: self.id) # rubocop:disable Style/RedundantSelf
+  end
 
   private
 

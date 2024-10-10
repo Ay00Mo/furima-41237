@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if current_user != @item.user || false # 購入機能実装後に修正(@item.order.present?) # rubocop:disable Style/IfUnlessModifier,Style/GuardClause,Lint/LiteralAsCondition
+    if current_user != @item.user || @item.order.present? # rubocop:disable Style/IfUnlessModifier,Style/GuardClause
       redirect_to root_path
     end
   end
