@@ -15,6 +15,6 @@ class OrderMailingAddress
 
   def save
     order = Order.create(user_id: user_id, item_id: item_id) # rubocop:disable Style/HashSyntax
-    MailingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, phone_number: phone_number, order_id: order.id) # rubocop:disable Style/HashSyntax,Layout/LineLength
+    MailingAddress.create(postal_code: postal_code, prefecture_id: prefecture_id, city: city, address: address, building_name: building_name, phone_number: phone_number, order_id: order.id) # rubocop:disable Style/HashSyntax,Layout/LineLength
   end
 end
