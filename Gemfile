@@ -56,7 +56,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-rails'
-  gem 'capistrano'
+  gem 'capistrano', '3.19.1'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
