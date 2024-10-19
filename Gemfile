@@ -56,11 +56,11 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'pry-rails'
-  gem 'capistrano', '3.19.1'
+  gem 'capistrano'
   gem 'capistrano-rbenv'
   gem 'capistrano-bundler'
   gem 'capistrano-rails'
-  gem 'capistrano3-unicorn'  
+  gem 'capistrano3-unicorn' 
 end
 
 group :development do
